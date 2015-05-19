@@ -48,22 +48,22 @@ public class MainActivity extends ActionBarActivity implements  SeekBarWithTwoTh
 
 
     @Override
-    public void SeekBarValueChanged(int thumb1Value, int thumb2Value, Bitmap thumb) {
+    public void SeekBarValueChanged(int thumb1Value, int t,  Bitmap thumb) {
 
-        int width = thumb.getWidth();
-        int height = thumb.getHeight();
-        float scaleWidth = ((float) thumb1Value) / width;
-        float scaleHeight = ((float) thumb2Value) / height;
-        // CREATE A MATRIX FOR THE MANIPULATION
-        Matrix matrix = new Matrix();
-        // RESIZE THE BIT MAP
-        matrix.postScale(scaleWidth, scaleHeight);
-
-        // "RECREATE" THE NEW BITMAP
-        thumb= Bitmap.createBitmap(thumb, 0, 0, width, height, matrix, false);
-        swtt.setThumb(thumb);
+//        int width = thumb.getWidth();
+//        int height = thumb.getHeight();
+//        float scaleWidth = ((float) thumb1Value) / width;
+//        float scaleHeight = ((float) thumb1Value) / height;
+//        // CREATE A MATRIX FOR THE MANIPULATION
+//        Matrix matrix = new Matrix();
+//        // RESIZE THE BIT MAP
+//        matrix.postScale(scaleWidth, scaleHeight);
+//
+//        // "RECREATE" THE NEW BITMAP
+//        thumb= Bitmap.createBitmap(thumb, 0, 0, width, height, matrix, false);
+//        swtt.setThumb(thumb);
 
         Log.d("MyLog", "value 1 : " + thumb1Value);
-        Log.d("MyLog", "value 2 : " + thumb2Value);
+        Log.d("MyLog", "value 2 : " + thumb1Value);
     }
 }

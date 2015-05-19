@@ -84,10 +84,6 @@ public class SeekBarWithTwoThumb extends ImageView {
 					&& mx <= thumb1X + thumbHalfWidth) {
 				selectedThumb = 1;
 				printLog("Select Thumb 1");
-			} else if (mx >= thumb2X - thumbHalfWidth
-					&& mx <= thumb2X + thumbHalfWidth) {
-				selectedThumb = 2;
-				printLog("Select Thumb 2");
 			}
 			break;
 		case MotionEvent.ACTION_MOVE:
@@ -99,11 +95,6 @@ public class SeekBarWithTwoThumb extends ImageView {
                 }
 
                 printLog("Move Thumb 1");
-            } else if (selectedThumb == 2) {
-                if (mx > thumb1X+4) {
-                    thumb2X = mx;
-                }
-                printLog("Move Thumb 2");
             }
             break;
 		case MotionEvent.ACTION_UP:
