@@ -14,8 +14,8 @@ public class SeekBarWithTwoThumb extends ImageView {
 
 	private String TAG = this.getClass().getSimpleName();
 	private Bitmap thumb = BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher);
-	private int thumb1X, thumb2X;
-	private int thumb1Value, thumb2Value;
+	private int thumb1X;
+	private int thumb1Value;
 	private int thumbY;
 	private Paint paint = new Paint();
 	private int selectedThumb;
@@ -47,9 +47,6 @@ public class SeekBarWithTwoThumb extends ImageView {
     }
 
 
-    public int getThumb2Value() {
-        return thumb2Value;
-    }
 
     private void init() {
 		printLog("View Height =" + getHeight() + "\t\t Thumb Height :"+ thumb.getHeight());
@@ -61,7 +58,6 @@ public class SeekBarWithTwoThumb extends ImageView {
 
 		thumbHalfWidth = thumb.getWidth()/2;
 		thumb1X = thumbHalfWidth;
-		thumb2X = 100 ;
 		invalidate();
 	}
 	public void setSeekBarChangeListener(SeekBarChangeListener scl){
@@ -72,7 +68,6 @@ public class SeekBarWithTwoThumb extends ImageView {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		canvas.drawBitmap(thumb, thumb1X - thumbHalfWidth, thumbY,paint);
-		canvas.drawBitmap(thumb, thumb2X - thumbHalfWidth, thumbY,paint);
 	}
 
 	@Override
@@ -90,9 +85,8 @@ public class SeekBarWithTwoThumb extends ImageView {
 			printLog("Mouse Move : " + selectedThumb);
 
 			if (selectedThumb == 1) {
-                if (mx < thumb2X-4) {
+
                     thumb1X = mx;
-                }
 
                 printLog("Move Thumb 1");
             }
@@ -105,19 +99,13 @@ public class SeekBarWithTwoThumb extends ImageView {
 		if(thumb1X < 0)
 			thumb1X = 0;
 
-		if(thumb2X < 0)
-			thumb2X = 0;
-
 		if(thumb1X > getWidth() )
 			thumb1X =getWidth() ;
-
-		if(thumb2X > getWidth() )
-			thumb2X =getWidth() ;
 
 		invalidate();
 		if(scl !=null){
 			calculateThumbValue();
-			scl.SeekBarValueChanged(thumb1Value,thumb2Value, thumb);
+			scl.SeekBarValueChanged(thumb1Value, thumb);
 		}
 		return true;
 	}
@@ -128,14 +116,13 @@ public class SeekBarWithTwoThumb extends ImageView {
 
     private void calculateThumbValue(){
 		thumb1Value = (100*(thumb1X))/(getWidth());
-		thumb2Value = (100*(thumb2X))/(getWidth());
 	}
 	private void printLog(String log){
 		Log.i(TAG, log);
 	}
 
 	public interface SeekBarChangeListener{
-		void SeekBarValueChanged(int Thumb1Value, int Thumb2Value, Bitmap thumb);
+		void SeekBarValueChanged(int Thumb1Value,  Bitmap thumb);
 	}
 
 
